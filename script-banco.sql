@@ -7,46 +7,43 @@ DROP TABLE IF EXISTS Leito;
 
 
 CREATE TABLE Departamento (
-  nome_dep VARCHAR NOT NULL,
-  PRIMARY KEY (nome_dep)
+  id SERIAL PRIMARY KEY,
+  nome_dep VARCHAR NOT NULL UNIQUE
 );
 
 
 CREATE TABLE Usuario (
+  id SERIAL PRIMARY KEY,
   nome VARCHAR NOT NULL,
-  login VARCHAR NOT NULL,
+  login VARCHAR NOT NULL UNIQUE,
   senha VARCHAR NOT NULL,
-  permissoes VARCHAR NOT NULL,
-  PRIMARY KEY (login)
+  permissoes VARCHAR NOT NULL
 );
 
-
 CREATE TABLE Paciente (
-  cpf VARCHAR NOT NULL,
+  id SERIAL PRIMARY KEY,
+  cpf VARCHAR NOT NULL UNIQUE,
   nome VARCHAR NOT NULL,
   data_nascimento DATE NOT NULL,
   rua VARCHAR NOT NULL,
   bairro VARCHAR NOT NULL,
   cidade VARCHAR NOT NULL,
-  pais VARCHAR NOT NULL,
-  PRIMARY KEY (cpf)
+  pais VARCHAR NOT NULL
 );
 
 CREATE TABLE Medico (
-  crm VARCHAR NOT NULL,
+  id SERIAL PRIMARY KEY,
+  crm VARCHAR NOT NULL UNIQUE,
   login VARCHAR NOT NULL,
   nome_dep VARCHAR NOT NULL,
-  PRIMARY KEY (crm),
   FOREIGN KEY (login) REFERENCES Usuario(login),
   FOREIGN KEY (nome_dep) REFERENCES Departamento(nome_dep)
 );
 
-
-
 CREATE TABLE Leito (
-  numero INT NOT NULL,
-  tipo VARCHAR NOT NULL,
-  PRIMARY KEY (numero)
+  id SERIAL PRIMARY KEY,
+  numero INT NOT NULL UNIQUE,
+  tipo VARCHAR NOT NULL
 );
 
 CREATE TABLE Internacao (
